@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - KOD STORES</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link active"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu hidden">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link hidden">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-p1">
+        <a href="index.html">Home</a> / <span>Shopping Cart</span>
+    </div>
+
+    <!-- Cart Section -->
+    <section class="cart-section section-p1">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h1><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h1>
+                <p>Review your items before checkout</p>
+            </div>
+
+            <div class="cart-content">
+                <!-- Cart Items -->
+                <div class="cart-items-section">
+                    <div class="cart-items-header">
+                        <h2>Cart Items (<span id="cart-items-count">0</span>)</h2>
+                        <button class="secondary-btn" id="clear-cart-btn">
+                            <i class="fas fa-trash"></i> Clear Cart
+                        </button>
+                    </div>
+
+                    <div class="cart-items" id="cart-items">
+                        <!-- Cart items will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Empty Cart State -->
+                    <div id="empty-cart" class="empty-state hidden">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added anything to your cart yet.</p>
+                        <a href="shop.html" class="primary-btn">Start Shopping</a>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary-section">
+                    <div class="cart-summary">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="summary-line">
+                            <span>Subtotal (<span id="summary-items-count">0</span> items):</span>
+                            <span id="cart-subtotal">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Shipping:</span>
+                            <span id="shipping-cost">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-line discount-line hidden" id="discount-line">
+                            <span>Discount:</span>
+                            <span id="discount-amount">-$0.00</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Tax:</span>
+                            <span id="tax-amount">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-line total-line">
+                            <span>Total:</span>
+                            <span id="cart-total">$0.00</span>
+                        </div>
+
+                        <!-- Coupon Code -->
+                        <div class="coupon-section">
+                            <h4>Have a coupon code?</h4>
+                            <div class="coupon-input">
+                                <label for="coupon-code" class="sr-only">Coupon code</label>
+                                <input type="text" id="coupon-code" placeholder="Enter coupon code" aria-label="Enter coupon code">
+                                <button id="apply-coupon-btn" class="secondary-btn">Apply</button>
+                            </div>
+                            <div id="coupon-message" class="coupon-message"></div>
+                        </div>
+
+                        <!-- Shipping Calculator -->
+                        <div class="shipping-calculator">
+                            <h4>Calculate Shipping</h4>
+                            <label for="shipping-country" class="sr-only">Shipping country</label>
+                            <select id="shipping-country" aria-label="Select shipping country">
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                            </select>
+                            <label for="shipping-zip" class="sr-only">ZIP/Postal Code</label>
+                            <input type="text" id="shipping-zip" placeholder="ZIP/Postal Code" aria-label="ZIP or Postal Code">
+                            <button id="calculate-shipping-btn" class="secondary-btn">Calculate</button>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="cart-actions">
+                            <a href="shop.html" class="secondary-btn">
+                                <i class="fas fa-arrow-left"></i> Continue Shopping
+                            </a>
+                            <button id="checkout-btn" class="primary-btn">
+                                <i class="fas fa-credit-card"></i> Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="recently-viewed">
+                        <h3>Recently Viewed</h3>
+                        <div class="recently-viewed-items" id="recently-viewed-items">
+                            <!-- Recently viewed items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved for Later -->
+            <div class="saved-for-later-section hidden" id="saved-for-later-section">
+                <h2>Saved for Later (<span id="saved-items-count">0</span>)</h2>
+                <div class="saved-items" id="saved-items">
+                    <!-- Saved items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Recommended Products -->
+            <div class="recommended-products">
+                <h2>You might also like</h2>
+                <div class="recommended-products-grid" id="recommended-products-grid">
+                    <!-- Recommended products will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Modals -->
+    <div id="remove-item-modal" class="modal">
+        <div class="modal-content">
+            <h3>Remove Item</h3>
+            <p>Are you sure you want to remove this item from your cart?</p>
+            <div class="modal-actions">
+                <button class="secondary-btn" onclick="closeModal('remove-item-modal')">Cancel</button>
+                <button class="danger-btn" id="confirm-remove-btn">Remove</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="clear-cart-modal" class="modal">
+        <div class="modal-content">
+            <h3>Clear Cart</h3>
+            <p>Are you sure you want to remove all items from your cart?</p>
+            <div class="modal-actions">
+                <button class="secondary-btn" onclick="closeModal('clear-cart-modal')">Cancel</button>
+                <button class="danger-btn" id="confirm-clear-btn">Clear Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-message" class="success-toast hidden">
+        <i class="fas fa-check-circle"></i>
+        <span id="success-text">Item updated successfully!</span>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+</body>
+</html>

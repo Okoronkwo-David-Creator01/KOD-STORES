@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - KOD STORES.</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="auth-link active">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="auth-section section-p1">
+        <div class="auth-container">
+            <div class="auth-form-wrapper">
+                <h2>Welcome Back</h2>
+                <p>Login to your KOD STORES account</p>
+                
+                <form id="login-form" class="auth-form">
+                    <div id="error-message" class="error-message"></div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required aria-describedby="email-help">
+                        <small id="email-help" class="form-hint">We'll never share your email with anyone else.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required aria-describedby="password-help">
+                        <small id="password-help" class="form-hint">Your password is case-sensitive.</small>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">Login</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="registration.html">Register here</a></p>
+                    <p><a href="#" class="forgot-password">Forgot your password?</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

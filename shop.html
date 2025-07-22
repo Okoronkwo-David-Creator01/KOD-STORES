@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - KOD STORES</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu hidden">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link hidden">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop-section section-p1">
+        <div class="shop-container">
+            <!-- Shop Header -->
+            <div class="shop-header">
+                <h1>Our Products</h1>
+                <p>Discover our amazing collection of products</p>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="shop-filters">
+                <div class="search-box">
+                    <label for="search-input" class="sr-only">Search products</label>
+                    <input type="text" id="search-input" placeholder="Search products..." aria-label="Search products">
+                    <button id="search-btn" aria-label="Search products"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="category-filter" class="sr-only">Filter by category</label>
+                    <select id="category-filter" aria-label="Filter by category">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="books">Books</option>
+                        <option value="home">Home & Garden</option>
+                        <option value="sports">Sports</option>
+                        <option value="beauty">Beauty</option>
+                    </select>
+
+                    <label for="price-filter" class="sr-only">Filter by price range</label>
+                    <select id="price-filter" aria-label="Filter by price range">
+                        <option value="">All Prices</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                    </select>
+
+                    <label for="rating-filter" class="sr-only">Filter by rating</label>
+                    <select id="rating-filter" aria-label="Filter by rating">
+                        <option value="">All Ratings</option>
+                        <option value="4+">4+ Stars</option>
+                        <option value="3+">3+ Stars</option>
+                        <option value="2+">2+ Stars</option>
+                    </select>
+
+                    <label for="sort-select" class="sr-only">Sort products</label>
+                    <select id="sort-select" aria-label="Sort products">
+                        <option value="name">Sort by Name</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Results Info -->
+            <div class="results-info">
+                <span id="results-count">Showing 0 products</span>
+                <div class="view-toggle">
+                    <button id="grid-view" class="view-btn active" aria-label="Grid view" title="Grid view"><i class="fas fa-th" aria-hidden="true"></i></button>
+                    <button id="list-view" class="view-btn" aria-label="List view" title="List view"><i class="fas fa-list" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-container">
+                <div id="products-grid" class="products-grid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+
+                <!-- Loading Spinner -->
+                <div id="loading-spinner" class="loading-spinner hidden">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+
+                <!-- No Results -->
+                <div id="no-results" class="empty-state hidden">
+                    <i class="fas fa-search"></i>
+                    <p>No products found matching your criteria</p>
+                    <button class="primary-btn" onclick="clearFilters()">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination buttons will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="quick-view-content">
+                <!-- Quick view content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+</body>
+</html>

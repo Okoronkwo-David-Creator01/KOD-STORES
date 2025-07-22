@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOD STORES - Your Online Shopping Destination</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu hidden">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link hidden">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to <span class="brand-highlight">KOD STORES</span></h1>
+                <p>Discover amazing products at unbeatable prices. Shop the latest trends in electronics, fashion, home & garden, and more.</p>
+                <div class="hero-buttons">
+                    <a href="shop.html" class="primary-btn">Start Shopping</a>
+                    <a href="about.html" class="secondary-btn">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600" alt="Shopping Experience">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section section-p1">
+        <div class="features-container">
+            <h2>Why Choose KOD STORES?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Fast Shipping</h3>
+                    <p>Get your orders delivered quickly with our express shipping options</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Shopping</h3>
+                    <p>Shop with confidence using our secure payment and data protection</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our customer service team is always here to help you</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>Not satisfied? Return your items hassle-free within 30 days</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section section-p1">
+        <div class="categories-container">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid">
+                <a href="shop.html?category=electronics" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400" alt="Electronics">
+                    </div>
+                    <div class="category-info">
+                        <h3>Electronics</h3>
+                        <p>Latest gadgets & tech</p>
+                    </div>
+                </a>
+                <a href="shop.html?category=clothing" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400" alt="Fashion">
+                    </div>
+                    <div class="category-info">
+                        <h3>Fashion</h3>
+                        <p>Trendy clothing & accessories</p>
+                    </div>
+                </a>
+                <a href="shop.html?category=home" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400" alt="Home & Garden">
+                    </div>
+                    <div class="category-info">
+                        <h3>Home & Garden</h3>
+                        <p>Beautiful home essentials</p>
+                    </div>
+                </a>
+                <a href="shop.html?category=beauty" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400" alt="Beauty">
+                    </div>
+                    <div class="category-info">
+                        <h3>Beauty</h3>
+                        <p>Skincare & cosmetics</p>
+                    </div>
+                </a>
+                <a href="shop.html?category=sports" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400" alt="Sports">
+                    </div>
+                    <div class="category-info">
+                        <h3>Sports & Fitness</h3>
+                        <p>Gear for active lifestyle</p>
+                    </div>
+                </a>
+                <a href="shop.html?category=books" class="category-card">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Books">
+                    </div>
+                    <div class="category-info">
+                        <h3>Books</h3>
+                        <p>Knowledge & entertainment</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products-section section-p1">
+        <div class="featured-container">
+            <h2>Featured Products</h2>
+            <div id="featured-products" class="products-grid">
+                <!-- Featured products will be loaded here -->
+            </div>
+            <div class="view-all-container">
+                <a href="shop.html" class="primary-btn">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter and be the first to know about new products, special offers, and exclusive deals.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KOD STORES</h3>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="shop.html?category=electronics">Electronics</a></li>
+                        <li><a href="shop.html?category=clothing">Fashion</a></li>
+                        <li><a href="shop.html?category=home">Home & Garden</a></li>
+                        <li><a href="shop.html?category=beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KOD STORES. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+    <script>
+        // Load featured products on homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.ShoppingSystem) {
+                const shop = new ShoppingSystem();
+                shop.loadFeaturedProducts();
+            }
+        });
+    </script>
+</body>
+</html>

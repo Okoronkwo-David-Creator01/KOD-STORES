@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": true,
+  "files.associations": {
+    "*.env": "dotenv"
+  },
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "git.enableSmartCommit": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "One Dark Pro",
+  "bracketPairColorizer.depreciation-notice": false,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "javascript": "javascript",
+    "typescript": "typescript"
+  }
+}

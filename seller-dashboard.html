@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard - KOD STORES.</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" id="user-menu" class="user-menu">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="seller-dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1>Seller Dashboard</h1>
+            <p id="welcome-message">Welcome back! Manage your store and track your performance.</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-products">0</h3>
+                    <p>Total Products</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-orders">0</h3>
+                    <p>Total Orders</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-revenue">$0</h3>
+                    <p>Total Revenue</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-customers">0</h3>
+                    <p>Customers</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="seller-dashboard-content">
+            <!-- Sidebar Navigation -->
+            <div class="dashboard-sidebar">
+                <nav class="dashboard-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-section="overview"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+                        <li><a href="#" class="nav-link" data-section="products"><i class="fas fa-boxes"></i> Products</a></li>
+                        <li><a href="#" class="nav-link" data-section="orders"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                        <li><a href="#" class="nav-link" data-section="analytics"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                        <li><a href="#" class="nav-link" data-section="customers"><i class="fas fa-users"></i> Customers</a></li>
+                        <li><a href="#" class="nav-link" data-section="inventory"><i class="fas fa-warehouse"></i> Inventory</a></li>
+                        <li><a href="#" class="nav-link" data-section="store-settings"><i class="fas fa-store"></i> Store Settings</a></li>
+                        <li><a href="#" class="nav-link" data-section="profile"><i class="fas fa-user"></i> Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="dashboard-main">
+                <!-- Overview Section -->
+                <div id="overview" class="dashboard-section active">
+                    <div class="section-header">
+                        <h2>Overview</h2>
+                        <button class="primary-btn" onclick="openAddProductModal()">
+                            <i class="fas fa-plus"></i> Add Product
+                        </button>
+                    </div>
+
+                    <div class="overview-grid">
+                        <div class="section-card">
+                            <div class="card-header">
+                                <h3>Recent Orders</h3>
+                                <a href="#" class="view-all-btn" onclick="switchSection('orders')">View All</a>
+                            </div>
+                            <div id="recent-orders">
+                                <div class="empty-state">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <p>No recent orders</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <div class="card-header">
+                                <h3>Top Products</h3>
+                                <a href="#" class="view-all-btn" onclick="switchSection('products')">View All</a>
+                            </div>
+                            <div id="top-products">
+                                <div class="empty-state">
+                                    <i class="fas fa-boxes"></i>
+                                    <p>No products yet</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <div class="card-header">
+                                <h3>Sales Overview</h3>
+                            </div>
+                            <div class="sales-chart">
+                                <canvas id="salesChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div id="products" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Product Management</h2>
+                        <button class="primary-btn" onclick="openAddProductModal()">
+                            <i class="fas fa-plus"></i> Add New Product
+                        </button>
+                    </div>
+
+                    <div class="products-filters">
+                        <input type="text" id="product-search" placeholder="Search products..." class="search-input">
+                        <select id="category-filter" class="filter-select" aria-label="Filter by category">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="books">Books</option>
+                        </select>
+                        <select id="status-filter" class="filter-select" aria-label="Filter by status">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                        </select>
+                    </div>
+
+                    <div id="products-grid" class="products-grid">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div id="orders" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Order Management</h2>
+                        <div class="order-filters">
+                            <select id="order-status-filter" class="filter-select" aria-label="Filter orders by status">
+                                <option value="">All Orders</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="orders-list" class="orders-list">
+                        <!-- Orders will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Analytics & Reports</h2>
+                        <div class="date-range-picker">
+                            <input type="date" id="start-date" class="date-input" aria-label="Start date for analytics">
+                            <span>to</span>
+                            <input type="date" id="end-date" class="date-input" aria-label="End date for analytics">
+                            <button class="secondary-btn" onclick="updateAnalytics()">Update</button>
+                        </div>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Sales Performance</h3>
+                            <canvas id="salesPerformanceChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Product Categories</h3>
+                            <canvas id="categoryChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Customer Analytics</h3>
+                            <div class="customer-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">New Customers</span>
+                                    <span class="stat-value" id="new-customers">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Returning Customers</span>
+                                    <span class="stat-value" id="returning-customers">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Customer Retention</span>
+                                    <span class="stat-value" id="customer-retention">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Revenue Trends</h3>
+                            <canvas id="revenueChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Section -->
+                <div id="customers" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Customer Management</h2>
+                        <input type="text" id="customer-search" placeholder="Search customers..." class="search-input">
+                    </div>
+
+                    <div id="customers-list" class="customers-list">
+                        <!-- Customers will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Inventory Section -->
+                <div id="inventory" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Inventory Management</h2>
+                        <button class="primary-btn" onclick="exportInventory()">
+                            <i class="fas fa-download"></i> Export Report
+                        </button>
+                    </div>
+
+                    <div class="inventory-alerts">
+                        <div class="alert-card low-stock">
+                            <h4>Low Stock Alerts</h4>
+                            <div id="low-stock-products">
+                                <!-- Low stock products will be loaded here -->
+                            </div>
+                        </div>
+                        <div class="alert-card out-of-stock">
+                            <h4>Out of Stock</h4>
+                            <div id="out-of-stock-products">
+                                <!-- Out of stock products will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="inventory-grid" class="inventory-grid">
+                        <!-- Inventory items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Store Settings Section -->
+                <div id="store-settings" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Store Settings</h2>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3>Store Information</h3>
+                            <form id="store-info-form" class="settings-form">
+                                <div class="form-group">
+                                    <label for="store-name">Store Name</label>
+                                    <input type="text" id="store-name" name="storeName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="store-description">Store Description</label>
+                                    <textarea id="store-description" name="storeDescription" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="store-logo">Store Logo URL</label>
+                                    <input type="url" id="store-logo" name="storeLogo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="store-banner">Store Banner URL</label>
+                                    <input type="url" id="store-banner" name="storeBanner">
+                                </div>
+                                <button type="submit" class="primary-btn">Save Changes</button>
+                            </form>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3>Business Information</h3>
+                            <form id="business-info-form" class="settings-form">
+                                <div class="form-group">
+                                    <label for="business-address">Business Address</label>
+                                    <textarea id="business-address" name="businessAddress" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="business-phone">Business Phone</label>
+                                    <input type="tel" id="business-phone" name="businessPhone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="business-email">Business Email</label>
+                                    <input type="email" id="business-email" name="businessEmail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tax-id">Tax ID</label>
+                                    <input type="text" id="tax-id" name="taxId">
+                                </div>
+                                <button type="submit" class="primary-btn">Save Changes</button>
+                            </form>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3>Shipping Settings</h3>
+                            <form id="shipping-settings-form" class="settings-form">
+                                <div class="form-group">
+                                    <label for="shipping-policy">Shipping Policy</label>
+                                    <textarea id="shipping-policy" name="shippingPolicy" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="return-policy">Return Policy</label>
+                                    <textarea id="return-policy" name="returnPolicy" rows="4"></textarea>
+                                </div>
+                                <div class="toggle-group">
+                                    <div class="toggle">
+                                        <input type="checkbox" id="free-shipping" name="freeShipping">
+                                        <label for="free-shipping" class="slider"></label>
+                                        <span>Offer Free Shipping</span>
+                                    </div>
+                                    <div class="toggle">
+                                        <input type="checkbox" id="international-shipping" name="internationalShipping">
+                                        <label for="international-shipping" class="slider"></label>
+                                        <span>International Shipping</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="primary-btn">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Profile Settings</h2>
+                    </div>
+
+                    <div class="profile-content">
+                        <div class="profile-form">
+                            <form id="profile-form" class="form-grid">
+                                <div class="form-group">
+                                    <label for="profile-name">Full Name</label>
+                                    <input type="text" id="profile-name" name="fullName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-email">Email</label>
+                                    <input type="email" id="profile-email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-phone">Phone</label>
+                                    <input type="tel" id="profile-phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-address">Address</label>
+                                    <input type="text" id="profile-address" name="address">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="primary-btn">Update Profile</button>
+                                    <button type="button" class="secondary-btn" onclick="changePassword()">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Product</h3>
+                <span class="close" onclick="closeAddProductModal()">&times;</span>
+            </div>
+            <form id="add-product-form" class="modal-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-price">Price ($)</label>
+                        <input type="number" id="product-price" name="price" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="books">Books</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-stock">Stock Quantity</label>
+                        <input type="number" id="product-stock" name="stock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-sku">SKU</label>
+                        <input type="text" id="product-sku" name="sku">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product-images">Product Images (URLs)</label>
+                    <textarea id="product-images" name="images" rows="2" placeholder="Enter image URLs, one per line"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-status">Status</label>
+                    <select id="product-status" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" onclick="closeAddProductModal()">Cancel</button>
+                    <button type="submit" class="primary-btn">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="edit-product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Product</h3>
+                <span class="close" onclick="closeEditProductModal()">&times;</span>
+            </div>
+            <form id="edit-product-form" class="modal-form">
+                <input type="hidden" id="edit-product-id" name="id">
+                <div class="form-group">
+                    <label for="edit-product-name">Product Name</label>
+                    <input type="text" id="edit-product-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-description">Description</label>
+                    <textarea id="edit-product-description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-product-price">Price ($)</label>
+                        <input type="number" id="edit-product-price" name="price" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-product-category">Category</label>
+                        <select id="edit-product-category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="books">Books</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-product-stock">Stock Quantity</label>
+                        <input type="number" id="edit-product-stock" name="stock" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-product-sku">SKU</label>
+                        <input type="text" id="edit-product-sku" name="sku">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-images">Product Images (URLs)</label>
+                    <textarea id="edit-product-images" name="images" rows="2" placeholder="Enter image URLs, one per line"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-status">Status</label>
+                    <select id="edit-product-status" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" onclick="closeEditProductModal()">Cancel</button>
+                    <button type="submit" class="primary-btn">Update Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="seller-dashboard.js"></script>
+</body>
+</html>

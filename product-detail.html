@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - KOD STORES</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu" style="display: none;">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link" style="display: none;">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-p1">
+        <a href="index.html">Home</a> / <a href="shop.html">Shop</a> / <span id="breadcrumb-product">Product</span>
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section section-p1">
+        <div class="product-detail-container">
+            <!-- Product Images -->
+            <div class="product-images">
+                <div class="main-image">
+                    <img id="main-product-image" src="" alt="Product Image">
+                    <div class="image-zoom" id="image-zoom"></div>
+                </div>
+                <div class="thumbnail-images" id="thumbnail-images">
+                    <!-- Thumbnail images will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <div class="product-header">
+                    <h1 id="product-title">Loading...</h1>
+                    <div class="product-rating">
+                        <div class="stars" id="product-stars"></div>
+                        <span class="rating-text" id="rating-text">(0 reviews)</span>
+                    </div>
+                </div>
+
+                <div class="product-price">
+                    <span class="current-price" id="current-price">$0.00</span>
+                    <span class="original-price" id="original-price" style="display: none;">$0.00</span>
+                    <span class="discount-badge" id="discount-badge" style="display: none;">0% OFF</span>
+                </div>
+
+                <div class="product-description">
+                    <p id="product-description">Loading product description...</p>
+                </div>
+
+                <div class="product-options">
+                    <div class="option-group" id="size-options" style="display: none;">
+                        <label>Size:</label>
+                        <div class="size-selector">
+                            <!-- Size options will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="option-group" id="color-options" style="display: none;">
+                        <label>Color:</label>
+                        <div class="color-selector">
+                            <!-- Color options will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="quantity-group">
+                        <label>Quantity:</label>
+                        <div class="quantity-controls">
+                            <button type="button" id="qty-minus">-</button>
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button type="button" id="qty-plus">+</button>
+                        </div>
+                        <span class="stock-info" id="stock-info">In Stock</span>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" id="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="wishlist-btn" id="wishlist-btn">
+                        <i class="far fa-heart"></i> Add to Wishlist
+                    </button>
+                    <button class="buy-now-btn" id="buy-now-btn">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+
+                <div class="product-meta">
+                    <div class="meta-item">
+                        <strong>SKU:</strong> <span id="product-sku">-</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Category:</strong> <span id="product-category">-</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Tags:</strong> <span id="product-tags">-</span>
+                    </div>
+                </div>
+
+                <div class="product-guarantee">
+                    <div class="guarantee-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Free shipping on orders over $50</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-undo"></i>
+                        <span>30-day return policy</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>1-year warranty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Tabs -->
+        <div class="product-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="specifications">Specifications</button>
+                <button class="tab-btn" data-tab="reviews">Reviews</button>
+                <button class="tab-btn" data-tab="shipping">Shipping</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="description-tab">
+                    <div id="detailed-description">
+                        <!-- Detailed description will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="specifications-tab">
+                    <div id="product-specifications">
+                        <!-- Specifications will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="reviews-tab">
+                    <div class="reviews-section">
+                        <div class="reviews-summary">
+                            <div class="rating-overview">
+                                <div class="average-rating">
+                                    <span class="rating-number" id="avg-rating">0.0</span>
+                                    <div class="rating-stars" id="avg-rating-stars"></div>
+                                    <span class="total-reviews" id="total-reviews">0 reviews</span>
+                                </div>
+                                <div class="rating-breakdown" id="rating-breakdown">
+                                    <!-- Rating breakdown will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reviews-list" id="reviews-list">
+                            <!-- Reviews will be loaded here -->
+                        </div>
+
+                        <div class="write-review" id="write-review-section">
+                            <h3>Write a Review</h3>
+                            <form id="review-form">
+                                <div class="rating-input">
+                                    <label>Your Rating:</label>
+                                    <div class="star-rating" id="star-rating">
+                                        <span data-rating="1">★</span>
+                                        <span data-rating="2">★</span>
+                                        <span data-rating="3">★</span>
+                                        <span data-rating="4">★</span>
+                                        <span data-rating="5">★</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Review Title:</label>
+                                    <input type="text" id="review-title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Your Review:</label>
+                                    <textarea id="review-text" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="primary-btn">Submit Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="shipping-tab">
+                    <div class="shipping-info">
+                        <h3>Shipping Information</h3>
+                        <div class="shipping-options">
+                            <div class="shipping-option">
+                                <strong>Standard Shipping (5-7 business days)</strong>
+                                <p>Free on orders over $50, otherwise $5.99</p>
+                            </div>
+                            <div class="shipping-option">
+                                <strong>Express Shipping (2-3 business days)</strong>
+                                <p>$12.99</p>
+                            </div>
+                            <div class="shipping-option">
+                                <strong>Overnight Shipping (1 business day)</strong>
+                                <p>$24.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2>Related Products</h2>
+            <div class="related-products-grid" id="related-products-grid">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Message Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-content">
+                <i class="fas fa-check-circle"></i>
+                <h3>Added to Cart!</h3>
+                <p>Product successfully added to your cart.</p>
+                <div class="modal-actions">
+                    <button class="secondary-btn" onclick="closeModal('success-modal')">Continue Shopping</button>
+                    <a href="cart.html" class="primary-btn">View Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+</body>
+</html>
