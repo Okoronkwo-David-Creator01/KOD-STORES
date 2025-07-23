@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Login</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; padding-top: 50px; }
+form { background: white; display: inline-block; padding: 20px; border-radius: 5px; }
+input { margin: 5px; padding: 8px; }
+button { padding: 8px 15px; }
+</style>
+</head>
+<body>
+<h2>Admin Login</h2>
+<form id="login-form">
+<input type="password" id="password" placeholder="Enter Admin Password" required><br>
+<button type="submit">Login</button>
+</form>
+<script>
+document.getElementById('login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const password = document.getElementById('password').value;
+    const res = await fetch('/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+    });
+    if ((await res.text()) === 'OK') {
+        window.location.href = '/admin.html';
+    } else {
+        alert('Invalid password');
+    }
+});
+</script>
+</body>
+</html>

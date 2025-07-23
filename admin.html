@@ -7,6 +7,74 @@
     <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+
+            font-size: 14px;
+            color: #555;
+            vertical-align: middle;
+            font-weight: normal;
+            line-height: 1.5;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            margin: 2px;
+            padding: 4px 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+
 </head>
 <body>
     <!-- Admin Header -->
@@ -99,23 +167,40 @@
                         </select>
                         <input type="text" id="userSearch" placeholder="Search users...">
                     </div>
-                    <div class="user-table-container">
-                        <table class="admin-table">
+                    <div class="users-table-container">
+                        <table class="users-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Type</th>
+                                    <th>Role</th>
                                     <th>Registered</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="userTableBody">
-                                <!-- Users will be loaded here -->
+                                <!-- User data will be populated here -->
                             </tbody>
                         </table>
                     </div>
+                    <main>
+                        <h2>Manage Sellers</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Transaction</th>
+                                    <th>Receipt</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seller-table">
+                                <!-- Seller data will be populated here -->
+                            </tbody>
+                        </table>
+                    </main>
                 </div>
 
                 <!-- Recent Activity -->
@@ -210,7 +295,113 @@
     </section>
 
     <script src="admin.js"></script>
+    <script>
+        // Load sellers data from localStorage (fallback from server-side implementation)
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSellersData();
+        });
+
+        function loadSellersData() {
+            try {
+                // Try to fetch from server first, then fallback to localStorage
+                fetch('/sellers.json')
+                .then(res => res.json())
+                .then(data => populateSellersTable(data))
+                .catch(() => {
+                    // Fallback to localStorage implementation
+                    const users = JSON.parse(localStorage.getItem('kod_users') || '[]');
+                    const sellers = users.filter(user => user.role === 'seller');
+                    const sellersData = {};
+                    sellers.forEach(seller => {
+                        sellersData[seller.email] = {
+                            paid: seller.paid || false,
+                            tx_ref: seller.tx_ref || null,
+                            receipt: seller.receipt || null
+                        };
+                    });
+                    populateSellersTable(sellersData);
+                });
+            } catch (error) {
+                console.error('Error loading sellers data:', error);
+            }
+        }
+
+        function populateSellersTable(data) {
+            const tbody = document.getElementById("seller-table");
+            tbody.innerHTML = ''; // Clear existing data
+            
+            if (Object.keys(data).length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No sellers found</td></tr>';
+                return;
+            }
+
+            Object.entries(data).forEach(([email, info]) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${email}</td>
+                    <td>${info.paid ? '✅ Paid' : '❌ Unpaid'}</td>
+                    <td>${info.tx_ref || '-'}</td>
+                    <td>${info.receipt ? `<a href='/${info.receipt}' target='_blank'>View</a>` : '-'}</td>
+                    <td>
+                        ${!info.paid && info.receipt ? `
+                        <button onclick="approve('${email}')">Approve</button>
+                        <button onclick="reject('${email}')">Reject</button>
+                        ` : info.paid ? 'Approved' : 'Pending'}
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function approve(email) {
+            try {
+                // Try server-side first
+                fetch('/approve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                }).then(() => location.reload())
+                .catch(() => {
+                    // Fallback to localStorage
+                    const users = JSON.parse(localStorage.getItem('kod_users') || '[]');
+                    const userIndex = users.findIndex(user => user.email === email);
+                    if (userIndex !== -1) {
+                        users[userIndex].paid = true;
+                        localStorage.setItem('kod_users', JSON.stringify(users));
+                        loadSellersData();
+                        alert(`${email} has been approved for selling.`);
+                    }
+                });
+            } catch (error) {
+                console.error('Error approving seller:', error);
+            }
+        }
+
+        function reject(email) {
+            try {
+                // Try server-side first
+                fetch('/reject', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                }).then(() => location.reload())
+                .catch(() => {
+                    // Fallback to localStorage
+                    const users = JSON.parse(localStorage.getItem('kod_users') || '[]');
+                    const userIndex = users.findIndex(user => user.email === email);
+                    if (userIndex !== -1) {
+                        users[userIndex].paid = false;
+                        users[userIndex].receipt = null;
+                        localStorage.setItem('kod_users', JSON.stringify(users));
+                        loadSellersData();
+                        alert(`${email}'s seller application has been rejected.`);
+                    }
+                });
+            } catch (error) {
+                console.error('Error rejecting seller:', error);
+            }
+        }
+    </script>
 </body>
 </html>
-<script>
 

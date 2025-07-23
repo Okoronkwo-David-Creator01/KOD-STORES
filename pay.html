@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pay to Access Marketplace</title>
+<link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 400px;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Seller Access Fee</h2>
+    <p>Pay <strong>₦15,000</strong> to unlock your seller dashboard and start listing your products.</p>
+    <button id="pay-now">Pay ₦15,000</button>
+</div>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+document.getElementById("pay-now").onclick = function () {
+    const email = prompt("Enter your email:");
+    if (!email) return alert("Email is required!");
+
+    FlutterwaveCheckout({
+        public_key: "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxx", // replace with your public key
+        tx_ref: "txn-" + Date.now(),
+        amount: 15000,
+        currency: "NGN",
+        payment_options: "card, banktransfer, ussd",
+        customer: {
+            email: email,
+            name: email
+        },
+        callback: function (data) {
+            alert("Payment complete. Verifying...");
+            fetch("/payments/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ transaction_id: data.transaction_id, email })
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    alert("Payment verified. You can now access the seller dashboard.");
+                    window.location.href = "/seller-dashboard.html?email=" + encodeURIComponent(email);
+                } else {
+                    alert("Payment verification failed. Contact support.");
+                }
+            });
+        },
+        onclose: function () {
+            alert("Payment cancelled.");
+        },
+        customizations: {
+            title: "KOD STORES",
+            description: "Access Fee for Marketplace",
+            logo: url('C:\Users\Okoronkwo David\Desktop\KOD STORES\IMG\Logo.png') <!-- Optional: Replace with your logo URL -->
+        },
+    });
+};
+</script>
+
+</body>
+</html>

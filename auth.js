@@ -105,7 +105,9 @@ class AuthSystem {
             password: this.hashPassword(userData.password),
             role: userData.userRole,
             createdAt: new Date().toISOString(),
-            isActive: true
+            registeredAt: new Date().toISOString(), // Add for admin dashboard compatibility
+            isActive: true,
+            active: true // Add for admin dashboard compatibility
         };
 
         // Save user

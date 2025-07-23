@@ -7,11 +7,20 @@
     <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #seller-info {
+            font-size: 18px;
+            color: #2d7d2d;
+            font-weight: bold;
+            margin: 10px;
+        }
+</style>
+
 </head>
 <body>
 
     <section id="header">
-        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt=""></a>
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
         <div>
             <ul id="navbar">
                 <li><a href="index.html">Home</a></li>
@@ -19,11 +28,14 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
                 <li><a href="#" id="user-menu" class="user-menu">Dashboard</a></li>
                 <li><a href="#" id="logout-btn" class="auth-link">Logout</a></li>
             </ul>
         </div>
     </section>
+
+    <p id="seller-info"></p>
 
     <div class="seller-dashboard-container">
         <!-- Dashboard Header -->
@@ -521,7 +533,16 @@
             </form>
         </div>
     </div>
-
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("email");
+        if (!email) {
+        alert("Email not provided. Redirecting to payment page.");
+        window.location.href = "/pay.html";
+        } else {
+            document.getElementById("seller-info").innerText = `Logged in as: ${email}`;
+        }
+    </script>
     <script src="script.js"></script>
     <script src="auth.js"></script>
     <script src="seller-dashboard.js"></script>

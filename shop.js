@@ -25,7 +25,7 @@ class ShoppingSystem {
     this.bindEvents();
 
     // Initialize based on current page
-    const currentPage = window.location.pathname.split("/").pop();
+    const currentPage = window.location.pathname.split("/").pop() || 'index.html';
     switch (currentPage) {
       case "shop.html":
         this.initShopPage();
@@ -38,6 +38,14 @@ class ShoppingSystem {
         break;
       case "checkout.html":
         this.initCheckoutPage();
+        break;
+      case "index.html":
+        // Initialize basic functionality for homepage
+        this.loadFeaturedProducts();
+        break;
+      default:
+        // For other pages, just ensure cart count is updated
+        this.updateCartCount();
         break;
     }
   }
@@ -1746,6 +1754,12 @@ class ShoppingSystem {
 
     // Get first 6 products as featured
     const featuredProducts = this.products.slice(0, 6);
+    
+    if (featuredProducts.length === 0) {
+      featuredContainer.innerHTML = '<p class="no-products">No featured products available at this time.</p>';
+      return;
+    }
+    
     featuredContainer.innerHTML = featuredProducts
       .map((product) => this.createProductCard(product))
       .join("");

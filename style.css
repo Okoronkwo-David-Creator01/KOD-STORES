@@ -48,19 +48,34 @@ body {
 
 /* Utility Classes for Accessibility */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Error handling and no-data states */
+.no-products {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-style: italic;
 }
 
 /* Header Styles */
@@ -4181,6 +4196,24 @@ body {
     margin-bottom: 20px;
 }
 
+.footer-contact {
+    margin-bottom: 20px;
+}
+
+.footer-contact p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-contact i {
+    color: #088178;
+    width: 16px;
+}
+
 .footer-column ul {
     list-style: none;
     padding: 0;
@@ -5982,4 +6015,10 @@ body {
     .admin-table {
         min-width: 400px;
     }
+}
+
+#seller-info {
+    font-size: 16px;
+    color: green;
+    margin: 10px;
 }

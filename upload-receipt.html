@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upload Receipt</title>
+</head>
+<body>
+<h2>Upload Receipt</h2>
+<form id="receipt-form" enctype="multipart/form-data">
+<input type="email" name="email" placeholder="Your Email" required><br>
+<input type="file" name="receipt" accept="image/*,.pdf" required><br>
+<button type="submit">Upload</button>
+</form>
+<script>
+document.getElementById("receipt-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const res = await fetch("/upload-receipt", { method: "POST", body: formData });
+    alert(await res.text());
+});
+</script>
+</body>
+</html>

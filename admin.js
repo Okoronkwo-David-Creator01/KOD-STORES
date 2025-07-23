@@ -66,19 +66,19 @@ class AdminDashboard {
                 <td>
                     <span class="role-badge ${user.role}">${user.role}</span>
                 </td>
-                <td>${this.formatDate(user.registeredAt)}</td>
+                <td>${this.formatDate(user.registeredAt || user.createdAt)}</td>
                 <td>
-                    <span class="status-badge ${user.active ? 'active' : 'inactive'}">
-                        ${user.active ? 'Active' : 'Inactive'}
+                    <span class="status-badge ${(user.active || user.isActive) ? 'active' : 'inactive'}">
+                        ${(user.active || user.isActive) ? 'Active' : 'Inactive'}
                     </span>
                 </td>
                 <td>
                     <button class="admin-btn small" onclick="adminDashboard.viewUser('${user.email}')">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button class="admin-btn small ${user.active ? 'warning' : 'success'}" 
+                    <button class="admin-btn small ${(user.active || user.isActive) ? 'warning' : 'success'}" 
                             onclick="adminDashboard.toggleUserStatus('${user.email}')">
-                        <i class="fas fa-${user.active ? 'ban' : 'check'}"></i>
+                        <i class="fas fa-${(user.active || user.isActive) ? 'ban' : 'check'}"></i>
                     </button>
                 </td>
             </tr>
@@ -111,19 +111,19 @@ class AdminDashboard {
                 <td>
                     <span class="role-badge ${user.role}">${user.role}</span>
                 </td>
-                <td>${this.formatDate(user.registeredAt)}</td>
+                <td>${this.formatDate(user.registeredAt || user.createdAt)}</td>
                 <td>
-                    <span class="status-badge ${user.active ? 'active' : 'inactive'}">
-                        ${user.active ? 'Active' : 'Inactive'}
+                    <span class="status-badge ${(user.active || user.isActive) ? 'active' : 'inactive'}">
+                        ${(user.active || user.isActive) ? 'Active' : 'Inactive'}
                     </span>
                 </td>
                 <td>
                     <button class="admin-btn small" onclick="adminDashboard.viewUser('${user.email}')">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button class="admin-btn small ${user.active ? 'warning' : 'success'}" 
+                    <button class="admin-btn small ${(user.active || user.isActive) ? 'warning' : 'success'}" 
                             onclick="adminDashboard.toggleUserStatus('${user.email}')">
-                        <i class="fas fa-${user.active ? 'ban' : 'check'}"></i>
+                        <i class="fas fa-${(user.active || user.isActive) ? 'ban' : 'check'}"></i>
                     </button>
                 </td>
             </tr>
@@ -250,7 +250,9 @@ class AdminDashboard {
         const userIndex = users.findIndex(u => u.email === email);
         
         if (userIndex !== -1) {
-            users[userIndex].active = !users[userIndex].active;
+            const currentStatus = users[userIndex].active || users[userIndex].isActive;
+            users[userIndex].active = !currentStatus;
+            users[userIndex].isActive = !currentStatus;
             localStorage.setItem('kod_users', JSON.stringify(users));
             this.loadUsers();
             this.loadUserStats();
