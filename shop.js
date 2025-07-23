@@ -1088,13 +1088,38 @@ class ShoppingSystem {
   // Cart functionality
   addToCart(productId, quantity = 1) {
     const product = this.products.find((p) => p.id === productId);
-    if (!product) return;
+    if (!product) {
+      if (window.notificationSystem) {
+        window.notificationSystem.showToast("Product not found!", 'error');
+      }
+      return;
+    }
+
+    if (product.stock === 0) {
+      if (window.notificationSystem) {
+        window.notificationSystem.showToast("This product is out of stock!", 'error');
+      }
+      return;
+    }
 
     const existingItem = this.cart.find((item) => item.productId === productId);
 
     if (existingItem) {
-      existingItem.quantity += quantity;
+      const newQuantity = existingItem.quantity + quantity;
+      if (newQuantity > product.stock) {
+        if (window.notificationSystem) {
+          window.notificationSystem.showToast(`Only ${product.stock} items available in stock!`, 'warning');
+        }
+        return;
+      }
+      existingItem.quantity = newQuantity;
     } else {
+      if (quantity > product.stock) {
+        if (window.notificationSystem) {
+          window.notificationSystem.showToast(`Only ${product.stock} items available in stock!`, 'warning');
+        }
+        return;
+      }
       this.cart.push({
         productId: productId,
         quantity: quantity,
@@ -1106,7 +1131,12 @@ class ShoppingSystem {
 
     this.saveCart();
     this.updateCartCount();
-    this.showSuccessMessage("Product added to cart!");
+    
+    if (window.notificationSystem) {
+      window.notificationSystem.showToast(`${product.name} added to cart!`, 'success');
+    } else {
+      this.showSuccessMessage("Product added to cart!");
+    }
   }
 
   // Update cart item quantity

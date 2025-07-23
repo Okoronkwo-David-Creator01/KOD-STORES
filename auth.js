@@ -118,6 +118,11 @@ class AuthSystem {
         this.loginUser(newUser);
         this.showSuccess('Account created successfully! Redirecting...');
         
+        // Send welcome notification
+        if (window.notificationSystem) {
+            window.notificationSystem.welcomeMessage(newUser.fullName);
+        }
+        
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 2000);
@@ -144,6 +149,11 @@ class AuthSystem {
         // Login user
         this.loginUser(user);
         this.showSuccess('Login successful! Redirecting...');
+        
+        // Show login notification
+        if (window.notificationSystem) {
+            window.notificationSystem.showToast(`Welcome back, ${user.fullName}!`, 'success');
+        }
         
         setTimeout(() => {
             window.location.href = 'index.html';

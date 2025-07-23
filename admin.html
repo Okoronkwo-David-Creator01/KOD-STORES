@@ -184,9 +184,20 @@
                             </tbody>
                         </table>
                     </div>
-                    <main>
-                        <h2>Manage Sellers</h2>
-                        <table>
+                </div>
+
+                <!-- Seller Management -->
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-store"></i> Seller Management</h2>
+                        <div class="section-actions">
+                            <button class="admin-btn small" onclick="refreshSellers()">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sellers-table-container">
+                        <table class="sellers-table">
                             <thead>
                                 <tr>
                                     <th>Email</th>
@@ -200,7 +211,7 @@
                                 <!-- Seller data will be populated here -->
                             </tbody>
                         </table>
-                    </main>
+                    </div>
                 </div>
 
                 <!-- Recent Activity -->
@@ -294,6 +305,8 @@
         </div>
     </section>
 
+    <script src="notifications.js"></script>
+    <script src="wishlist.js"></script>
     <script src="admin.js"></script>
     <script>
         // Load sellers data from localStorage (fallback from server-side implementation)

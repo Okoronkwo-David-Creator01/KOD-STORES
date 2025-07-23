@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - KOD STORES</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="wishlist.html" class="active">Wishlist</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu hidden">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link hidden">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-p1">
+        <a href="index.html">Home</a> / <span>My Wishlist</span>
+    </div>
+
+    <!-- Wishlist Section -->
+    <section class="wishlist-section section-p1">
+        <div class="wishlist-container">
+            <div class="wishlist-header">
+                <div class="wishlist-title">
+                    <h1><i class="fas fa-heart"></i> My Wishlist</h1>
+                    <p>Save your favorite items for later</p>
+                </div>
+                <div class="wishlist-actions">
+                    <button class="secondary-btn" onclick="exportWishlist()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="primary-btn" onclick="moveAllToCart()">
+                        <i class="fas fa-shopping-cart"></i> Move All to Cart
+                    </button>
+                    <button class="danger-btn" onclick="clearWishlist()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wishlist Stats -->
+            <div class="wishlist-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-wishlist-items">0</span>
+                    <span class="stat-label">Items Saved</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-wishlist-value">$0.00</span>
+                    <span class="stat-label">Total Value</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="price-drops-count">0</span>
+                    <span class="stat-label">Price Drops</span>
+                </div>
+            </div>
+
+            <!-- Wishlist Content -->
+            <div class="wishlist-content">
+                <!-- Filter and Sort Bar -->
+                <div class="wishlist-filters">
+                    <div class="filter-group">
+                        <label for="wishlist-category-filter">Category:</label>
+                        <select id="wishlist-category-filter">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="books">Books</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="beauty">Beauty</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="wishlist-sort">Sort by:</label>
+                        <select id="wishlist-sort">
+                            <option value="recent">Recently Added</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name A-Z</option>
+                            <option value="price-drop">Price Drops First</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
+                        <button id="grid-view" class="view-btn active" title="Grid View">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button id="list-view" class="view-btn" title="List View">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Wishlist Items -->
+                <div class="wishlist-items-container">
+                    <div id="wishlist-items" class="wishlist-items">
+                        <!-- Wishlist items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Recently Viewed -->
+                <div class="recently-viewed-section">
+                    <h2>Recently Viewed</h2>
+                    <div class="recently-viewed-items" id="recently-viewed-items">
+                        <!-- Recently viewed items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Recommended Products -->
+                <div class="recommended-section">
+                    <h2>You Might Also Like</h2>
+                    <div class="recommended-items" id="recommended-items">
+                        <!-- Recommended items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Product</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- Share content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KOD STORES</h3>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-envelope"></i> david.okoronkwo2008@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +234 903 550 5663</p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp Available</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="shop.html?category=electronics">Electronics</a></li>
+                        <li><a href="shop.html?category=clothing">Fashion</a></li>
+                        <li><a href="shop.html?category=home">Home & Garden</a></li>
+                        <li><a href="shop.html?category=beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KOD STORES. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="notifications.js"></script>
+    <script src="advanced-search.js"></script>
+    <script src="wishlist.js"></script>
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+    <script>
+        // Wishlist page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update wishlist stats
+            updateWishlistStats();
+            
+            // Bind filter and sort events
+            bindWishlistFilters();
+            
+            // Load related content
+            loadRecentlyViewed();
+            loadRecommendations();
+        });
+
+        function updateWishlistStats() {
+            const wishlist = JSON.parse(localStorage.getItem('kod_wishlist') || '[]');
+            
+            // Total items
+            document.getElementById('total-wishlist-items').textContent = wishlist.length;
+            
+            // Total value
+            const totalValue = wishlist.reduce((sum, item) => sum + (item.price || 0), 0);
+            document.getElementById('total-wishlist-value').textContent = `$${totalValue.toFixed(2)}`;
+            
+            // Price drops (mock calculation)
+            const priceDrops = wishlist.filter(item => 
+                item.originalPrice && item.price < item.originalPrice
+            ).length;
+            document.getElementById('price-drops-count').textContent = priceDrops;
+        }
+
+        function bindWishlistFilters() {
+            const categoryFilter = document.getElementById('wishlist-category-filter');
+            const sortSelect = document.getElementById('wishlist-sort');
+            
+            categoryFilter.addEventListener('change', filterAndSortWishlist);
+            sortSelect.addEventListener('change', filterAndSortWishlist);
+            
+            // View toggle
+            document.getElementById('grid-view').addEventListener('click', () => setWishlistView('grid'));
+            document.getElementById('list-view').addEventListener('click', () => setWishlistView('list'));
+        }
+
+        function filterAndSortWishlist() {
+            const category = document.getElementById('wishlist-category-filter').value;
+            const sortBy = document.getElementById('wishlist-sort').value;
+            
+            let wishlist = JSON.parse(localStorage.getItem('kod_wishlist') || '[]');
+            
+            // Filter by category
+            if (category) {
+                wishlist = wishlist.filter(item => item.category === category);
+            }
+            
+            // Sort
+            switch (sortBy) {
+                case 'oldest':
+                    wishlist.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt));
+                    break;
+                case 'price-low':
+                    wishlist.sort((a, b) => (a.price || 0) - (b.price || 0));
+                    break;
+                case 'price-high':
+                    wishlist.sort((a, b) => (b.price || 0) - (a.price || 0));
+                    break;
+                case 'name':
+                    wishlist.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'price-drop':
+                    wishlist.sort((a, b) => {
+                        const aDrop = a.originalPrice && a.price < a.originalPrice;
+                        const bDrop = b.originalPrice && b.price < b.originalPrice;
+                        if (aDrop && !bDrop) return -1;
+                        if (!aDrop && bDrop) return 1;
+                        return 0;
+                    });
+                    break;
+                default: // recent
+                    wishlist.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+            }
+            
+            // Re-render wishlist with filtered/sorted items
+            displayFilteredWishlist(wishlist);
+        }
+
+        function displayFilteredWishlist(items) {
+            const container = document.getElementById('wishlist-items');
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-wishlist">
+                        <i class="fas fa-filter"></i>
+                        <h3>No items match your filters</h3>
+                        <p>Try adjusting your filters or browse our shop.</p>
+                        <button class="primary-btn" onclick="clearFilters()">Clear Filters</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Use the wishlist system to render items
+            if (window.wishlistSystem) {
+                // Temporarily replace wishlist data
+                const originalWishlist = window.wishlistSystem.wishlist;
+                window.wishlistSystem.wishlist = items;
+                window.wishlistSystem.displayWishlist();
+                window.wishlistSystem.wishlist = originalWishlist;
+            }
+        }
+
+        function clearFilters() {
+            document.getElementById('wishlist-category-filter').value = '';
+            document.getElementById('wishlist-sort').value = 'recent';
+            if (window.wishlistSystem) {
+                window.wishlistSystem.displayWishlist();
+            }
+        }
+
+        function setWishlistView(view) {
+            const container = document.getElementById('wishlist-items');
+            const gridBtn = document.getElementById('grid-view');
+            const listBtn = document.getElementById('list-view');
+            
+            if (view === 'grid') {
+                container.classList.remove('list-view');
+                container.classList.add('grid-view');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            } else {
+                container.classList.remove('grid-view');
+                container.classList.add('list-view');
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+            }
+        }
+
+        function loadRecentlyViewed() {
+            const recentlyViewed = JSON.parse(localStorage.getItem('kod_recently_viewed') || '[]');
+            const container = document.getElementById('recently-viewed-items');
+            
+            if (recentlyViewed.length === 0) {
+                container.innerHTML = '<p class="no-items">No recently viewed items</p>';
+                return;
+            }
+            
+            // Display recent items (simplified)
+            container.innerHTML = recentlyViewed.slice(0, 4).map(productId => 
+                `<div class="recent-item" data-product-id="${productId}">
+                    <div class="recent-item-placeholder">Product ${productId}</div>
+                </div>`
+            ).join('');
+        }
+
+        function loadRecommendations() {
+            const container = document.getElementById('recommended-items');
+            container.innerHTML = '<p class="no-items">Recommendations will appear here based on your wishlist</p>';
+        }
+    </script>
+</body>
+</html>

@@ -59,6 +59,16 @@ class AdminDashboard {
         const users = JSON.parse(localStorage.getItem('kod_users') || '[]');
         const tbody = document.getElementById('userTableBody');
         
+        if (!tbody) {
+            console.error('User table body not found');
+            return;
+        }
+        
+        if (users.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 20px;">No users found</td></tr>';
+            return;
+        }
+        
         tbody.innerHTML = users.map(user => `
             <tr>
                 <td>${user.fullName}</td>
@@ -379,7 +389,15 @@ class AdminDashboard {
 
 // Global functions for HTML onclick events
 function exportUsers() {
-    adminDashboard.exportUsers();
+    if (adminDashboard) {
+        adminDashboard.exportUsers();
+    }
+}
+
+function refreshSellers() {
+    if (adminDashboard) {
+        adminDashboard.loadData();
+    }
 }
 
 function backupData() {

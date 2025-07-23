@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - KOD STORES</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/03/29/04/09/shopping-icon-2184065_1280.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="IMG/Logo.png" class="logo" alt="KOD STORES - Your Online Shopping Destination"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a></li>
+                <li><a href="login.html" class="auth-link">Login</a></li>
+                <li><a href="registration.html" class="auth-link">Register</a></li>
+                <li><a href="#" id="user-menu" class="user-menu hidden">Dashboard</a></li>
+                <li><a href="#" id="logout-btn" class="auth-link hidden">Logout</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb section-p1">
+        <a href="index.html">Home</a> / <span>Track Order</span>
+    </div>
+
+    <!-- Order Tracking Section -->
+    <section class="tracking-section section-p1">
+        <div class="tracking-container">
+            <!-- Tracking Form -->
+            <div class="tracking-form-container">
+                <div class="tracking-header">
+                    <h1><i class="fas fa-search-location"></i> Track Your Order</h1>
+                    <p>Enter your order number to track your package in real-time</p>
+                </div>
+
+                <form id="track-order-form" class="tracking-form">
+                    <div id="tracking-error" class="error-message" style="display: none;"></div>
+                    
+                    <div class="form-group">
+                        <label for="order-number">Order Number</label>
+                        <input type="text" id="order-number" name="orderNumber" 
+                               placeholder="e.g., KOD-2024-001" required
+                               pattern="KOD-[0-9]{4}-[0-9]{3}"
+                               title="Please enter a valid order number (e.g., KOD-2024-001)">
+                        <small class="form-hint">
+                            You can find your order number in your confirmation email or account dashboard
+                        </small>
+                    </div>
+
+                    <button type="submit" class="primary-btn track-btn">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </form>
+
+                <!-- Quick Links -->
+                <div class="quick-links">
+                    <h3>Need Help?</h3>
+                    <div class="help-options">
+                        <a href="contact.html" class="help-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Contact Support</span>
+                        </a>
+                        <a href="buyer-dashboard.html" class="help-link">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Account</span>
+                        </a>
+                        <a href="#faq" class="help-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>FAQ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Results -->
+            <div id="tracking-results" class="tracking-results hidden">
+                <!-- Results will be displayed here -->
+            </div>
+
+            <!-- Sample Orders for Demo -->
+            <div class="demo-section">
+                <h2>Try Demo Orders</h2>
+                <p>Don't have an order yet? Try these sample order numbers:</p>
+                <div class="demo-orders">
+                    <div class="demo-order" onclick="trackDemoOrder('KOD-2024-001')">
+                        <div class="demo-order-info">
+                            <strong>KOD-2024-001</strong>
+                            <span class="demo-status delivered">Delivered</span>
+                        </div>
+                        <p>Premium Wireless Headphones</p>
+                    </div>
+                    <div class="demo-order" onclick="trackDemoOrder('KOD-2024-002')">
+                        <div class="demo-order-info">
+                            <strong>KOD-2024-002</strong>
+                            <span class="demo-status shipped">Shipped</span>
+                        </div>
+                        <p>2x Organic Cotton T-Shirt + JavaScript Book</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div id="faq" class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How long does shipping take?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Standard shipping takes 5-7 business days, while express shipping takes 2-3 business days. You'll receive tracking information once your order ships.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Where can I find my order number?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Your order number is included in your confirmation email and is also available in your account dashboard under "My Orders".</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Can I change my shipping address?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can change your shipping address within 1 hour of placing your order. After that, please contact our customer service team for assistance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>What if my package is lost or damaged?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If your package is lost or arrives damaged, please contact us immediately. We'll work with the shipping carrier to resolve the issue and ensure you receive your order.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How do I return an item?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Items can be returned within 30 days of delivery. Visit your account dashboard to initiate a return or contact our customer service team for assistance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Why isn't my tracking information updating?</h3>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tracking information may take 24-48 hours to appear after your order ships. If you don't see updates after this time, please contact customer service.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KOD STORES</h3>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-envelope"></i> david.okoronkwo2008@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +234 903 550 5663</p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp Available</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="shop.html?category=electronics">Electronics</a></li>
+                        <li><a href="shop.html?category=clothing">Fashion</a></li>
+                        <li><a href="shop.html?category=home">Home & Garden</a></li>
+                        <li><a href="shop.html?category=beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KOD STORES. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="notifications.js"></script>
+    <script src="advanced-search.js"></script>
+    <script src="wishlist.js"></script>
+    <script src="order-tracking.js"></script>
+    <script src="auth.js"></script>
+    <script src="shop.js"></script>
+    <script>
+        // Check for order parameter in URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderParam = urlParams.get('order');
+            
+            if (orderParam) {
+                document.getElementById('order-number').value = orderParam;
+                // Auto-track the order
+                setTimeout(() => {
+                    document.getElementById('track-order-form').dispatchEvent(new Event('submit'));
+                }, 500);
+            }
+        });
+
+        // Demo order tracking
+        function trackDemoOrder(orderNumber) {
+            document.getElementById('order-number').value = orderNumber;
+            if (orderTracker) {
+                orderTracker.trackOrder(orderNumber);
+            }
+        }
+
+        // FAQ toggle functionality
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('i');
+            
+            // Toggle active class
+            faqItem.classList.toggle('active');
+            
+            // Toggle icon
+            if (faqItem.classList.contains('active')) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>
