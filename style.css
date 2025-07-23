@@ -5902,3 +5902,84 @@ body {
         gap: 20px;
     }
 }
+
+/* --- Admin Dashboard Custom Adjustments --- */
+.admin-header {
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(8,129,120,0.07);
+}
+
+.admin-dashboard {
+    padding-top: 0;
+    padding-bottom: 60px;
+}
+
+.admin-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.admin-section {
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(8,129,120,0.04);
+}
+
+.section-header {
+    background: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 24px 32px;
+    margin-bottom: 0;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    color: #088178;
+    font-weight: 700;
+}
+
+.admin-table {
+    background: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 1px 4px rgba(8,129,120,0.03);
+}
+
+.user-table-container {
+    padding: 0 32px 24px 32px;
+}
+
+.activity-list,
+.messages-container,
+.system-info,
+.data-actions,
+.backup-section,
+.chart-container {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 15px 10px;
+    }
+    .admin-dashboard {
+        padding: 10px;
+    }
+    .admin-container {
+        padding: 10px 0;
+    }
+    .section-header,
+    .user-table-container,
+    .activity-list,
+    .messages-container,
+    .system-info,
+    .data-actions,
+    .backup-section,
+    .chart-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .admin-table {
+        min-width: 400px;
+    }
+}

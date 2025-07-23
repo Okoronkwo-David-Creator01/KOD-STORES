@@ -212,3 +212,18 @@
     <script src="admin.js"></script>
 </body>
 </html>
+<script>
+// After successful registration
+const newUser = {
+  fullName: "John Doe",
+  email: "john@example.com",
+  phone: "08012345678",
+  role: "buyer", // or "seller"
+  registeredAt: new Date().toISOString(),
+  active: true
+};
+
+const users = JSON.parse(localStorage.getItem('kod_users') || '[]');
+users.push(newUser);
+localStorage.setItem('kod_users', JSON.stringify(users));
+</script>
